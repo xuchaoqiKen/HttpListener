@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>测试调用winform后台方法页面</title>
+<script src="jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+        
+function test(){
+	jQuery.support.cors = true;
+	$.ajax({
+        url:"http://localhost:30000/posttype", //请求的url地址
+        dataType: "json", //返回格式为json
+        async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+        data: {
+        	"FileName":$("#FileName").val()
+        }, //参数值
+        type: "post", //请求方式
+        beforeSend: function () {
+            //请求前的处理
+        },
+        success: function (res) {
+            alert(res.msg);
+			}, 
+		error: function(XMLHttpRequest, textStatus, errorThrown){
+        alert(XMLHttpRequest.status);
+        alert(XMLHttpRequest.readyState);
+        alert(textStatus);
+		alert(errorThrown);
+   }
+    });
+}
+</script>
+
+</head>
+<body>
+<h1>ajax 发送post</h1>
+	<input type ="text" id="FileName" >
+    <input type='button' onclick="test()" value='调用winform' />
+</body>
+</html>
